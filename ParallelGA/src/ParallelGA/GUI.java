@@ -1,3 +1,5 @@
+package ParallelGA;
+
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
@@ -22,7 +24,7 @@ public class GUI extends JFrame {
     /**
      * The constructor calls initComponents() to initialize all of the components of the graphical user interface
      */
-    public GUI() throws IOException, ClassNotFoundException {
+    public GUI() {
         initComponents();
     }
 

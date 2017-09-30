@@ -1,3 +1,5 @@
+package ParallelGA;
+
 /**
  * @author Kyle Zeller
  * This class provides the student affinity of a student in a classroom arrangement as

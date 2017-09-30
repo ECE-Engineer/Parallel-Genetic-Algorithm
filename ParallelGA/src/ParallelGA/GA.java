@@ -1,3 +1,5 @@
+package ParallelGA;
+
 import java.util.Arrays;
 
 /**
@@ -54,7 +56,7 @@ public class GA {
 
     /**
      * Gets the population array
-     * @return
+     * @return the population array
      */
     public Population[] getPopulations() {
         return populations;

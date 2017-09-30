@@ -1,3 +1,5 @@
+package ParallelGA;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 /**

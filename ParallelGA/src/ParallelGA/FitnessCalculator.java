@@ -1,3 +1,5 @@
+package ParallelGA;
+
 /**
  * @author Kyle Zeller
  * This class can calculate the fitness values of a chromosome as well as students in a chromosome.
