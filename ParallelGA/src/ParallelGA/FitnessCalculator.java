@@ -25,7 +25,9 @@ public class FitnessCalculator {
 
     /**
      * Calculates the sum of the squared differences between the current student and the adjacent student.
-     * This is how much the current student likes the adjacent students
+     * This is how much the current student likes the adjacent students.
+     * Only the top, bottom, left, and right spots are calculated with respect to the current spot on the array, to
+     * alleviate unnecessary computation time of calculating the four corners as well.
      * @param c chromosome
      * @param x position on x-axis
      * @param y position on y-axis

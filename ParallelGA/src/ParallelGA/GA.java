@@ -33,6 +33,8 @@ public class GA {
 
     /**
      * Calculates the next generation of populations based on fitness metrics
+     * This is an extra layer of optimization chosen arbitrarily to see more
+     * improvement in the populations quicker.
      * @return the next generation of populations based on fitness metrics
      */
     public Population[] nextGeneration() {
