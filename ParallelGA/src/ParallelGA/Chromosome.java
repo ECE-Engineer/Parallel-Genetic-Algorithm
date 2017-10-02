@@ -15,10 +15,6 @@ public class Chromosome {
     private final int stuAmount = 64;
     //constant for the limit of an RGB value
     private final int maxRGB = 256;
-    //constant for the mutation threshold
-    private final int mutationConstant = 50;
-    //constant for the limit of the mutation probability
-    private final int mutationLimit = 101;
 
     /**
      * Creates a new chromosome
@@ -49,7 +45,7 @@ public class Chromosome {
      * Calculates the fitness value for a chromosome
      * @return the fitness value for a chromosome
      */
-    public int getFitness() {
+    public double getFitness() {
         FitnessCalculator fitCalc = new FitnessCalculator();
 
         //calculate the fitness of the chromosome
@@ -90,9 +86,7 @@ public class Chromosome {
     public Student[] firstN(Student[] m, int pos) {
         //create a student array buffer
         Student[] buffer = new Student[pos];
-        for (int i = 0; i < pos; ++i) {
-            buffer[i] = m[i];
-        }
+        System.arraycopy(m, 0, buffer, 0, pos);
         return buffer;
     }
 
@@ -125,12 +119,12 @@ public class Chromosome {
         Student[] gene1 = firstN(this.studentArrangement, pos);
         Student[] gene2 = restN(arr, pos);
         int counter = 0;
-        for (int i = 0; i < gene1.length; ++i) {
-            buffer[counter] = gene1[i];
+        for (Student aGene1 : gene1) {
+            buffer[counter] = aGene1;
             ++counter;
         }
-        for (int i = 0; i < gene2.length; ++i) {
-            buffer[counter] = gene2[i];
+        for (Student aGene2 : gene2) {
+            buffer[counter] = aGene2;
             ++counter;
         }
         return buffer;
@@ -160,6 +154,10 @@ public class Chromosome {
      * @return the new student from the old student w/ one random chosen student's affinity changed based on a probability
      */
     public Student[] maybeMutateChromosome() {
+        //constant for the mutation threshold
+        int mutationConstant = 50;
+        //constant for the limit of the mutation probability
+        int mutationLimit = 101;
         if (ThreadLocalRandom.current().nextInt(mutationLimit) >= mutationConstant) {
             return this.mutate();
         } else {

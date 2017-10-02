@@ -11,8 +11,8 @@ public class FitnessCalculator {
      * @param c a chromosome
      * @return the entire fitness of a chromosome
      */
-    public int getOverallFitness(Chromosome c) {
-        int sumAffinity = 0;
+    public double getOverallFitness(Chromosome c) {
+        double sumAffinity = 0;
         int rowColLength = (int) Math.sqrt(c.getSeatArr().length);
 
         for (int x = 0; x < rowColLength; x++) {
@@ -33,29 +33,32 @@ public class FitnessCalculator {
      * @param y position on y-axis
      * @return how much the current student likes the adjacent students
      */
-    public int getSingleFitness(Chromosome c, int x, int y) {
+    public double getSingleFitness(Chromosome c, int x, int y) {
+        //constant for the maximum possible sum calculated from one student w/ respect to the adjacent students
+        int maxSingleSumPossible = 260100;
         int gridSize = (int) Math.sqrt(c.getSeatArr().length);
 
-        int currentVal = c.getSeatArr()[(gridSize * x) + y].getStuAff();
+        double currentVal = (double) c.getSeatArr()[(gridSize * x) + y].getStuAff();
 
-        int sum = 0;
+        double sum = 0;
         int left = x - 1;
         int right = x + 1;
         int top = y - 1;
         int bottom = y + 1;
 
         if (x != 0) { // left
-            sum += (c.getSeatArr()[left + (gridSize * y)] != null) ? (int) Math.pow((currentVal - c.getSeatArr()[left + (gridSize * y)].getStuAff()), 2) : 0;
+            sum += (c.getSeatArr()[left + (gridSize * y)] != null) ? Math.pow((currentVal - (double) c.getSeatArr()[left + (gridSize * y)].getStuAff()), 2) : 0;
         }
         if (x != gridSize - 1) { // right
-            sum += (c.getSeatArr()[right + (gridSize * y)] != null) ? (int) Math.pow((currentVal - c.getSeatArr()[right + (gridSize * y)].getStuAff()), 2) : 0;
+            sum += (c.getSeatArr()[right + (gridSize * y)] != null) ? Math.pow((currentVal - (double) c.getSeatArr()[right + (gridSize * y)].getStuAff()), 2) : 0;
         }
         if (y != 0) { // top
-            sum += (c.getSeatArr()[top + (gridSize * x)] != null) ? (int) Math.pow((currentVal - c.getSeatArr()[top + (gridSize * x)].getStuAff()), 2) : 0;
+            sum += (c.getSeatArr()[top + (gridSize * x)] != null) ? Math.pow((currentVal - (double) c.getSeatArr()[top + (gridSize * x)].getStuAff()), 2) : 0;
         }
         if (y != gridSize - 1) { // bottom
-            sum += (c.getSeatArr()[bottom + (gridSize * x)] != null) ? (int) Math.pow((currentVal - c.getSeatArr()[bottom + (gridSize * x)].getStuAff()), 2) : 0;
+            sum += (c.getSeatArr()[bottom + (gridSize * x)] != null) ? Math.pow((currentVal - (double) c.getSeatArr()[bottom + (gridSize * x)].getStuAff()), 2) : 0;
         }
-        return (-sum);
+
+        return ((-1)*(sum/ maxSingleSumPossible));
     }
 }

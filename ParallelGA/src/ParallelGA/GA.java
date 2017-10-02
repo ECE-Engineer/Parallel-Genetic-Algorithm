@@ -43,8 +43,8 @@ public class GA {
         int position = 0;
         //find the top half most fit populations
         Population[] half = this.getBestHalfPopulations();
-        for (int i = 0; i < half.length; ++i) {
-            buffer[position] = half[i];
+        for (Population aHalf : half) {
+            buffer[position] = aHalf;
             ++position;
         }
         //breed the top half populations
@@ -77,12 +77,12 @@ public class GA {
 
         FitnessCalculator fitCalc = new FitnessCalculator();
         //calculate the fitness of all the chromosomes
-        int[] fitnessArr = new int[popConst];
+        double[] fitnessArr = new double[popConst];
         for (int i = 0; i < popConst; ++i) {
             fitnessArr[i] = fitCalc.getOverallFitness(topChromosomes[i]);
         }
 
-        int[] copy = fitnessArr;
+        double[] copy = fitnessArr;
 
         //sort all the chromosomes
         Arrays.sort(fitnessArr);
@@ -113,12 +113,12 @@ public class GA {
      */
     public Population[] getBestHalfPopulations() {
         //calculate the fitness of all the chromosomes
-        int[] fitnessArr = new int[popConst];
+        double[] fitnessArr = new double[popConst];
         for (int i = 0; i < popConst; ++i) {
             fitnessArr[i] = populations[i].getPopulationAverage();
         }
 
-        int[] copy = fitnessArr;
+        double[] copy = fitnessArr;
 
         //sort all the chromosomes
         Arrays.sort(fitnessArr);
@@ -143,9 +143,9 @@ public class GA {
      * Calculates the fitness of the most fit population
      * @return the fitness of the most fit population
      */
-    public int getBestPopulationValue() {
+    public double getBestPopulationValue() {
         //calculate the fitness of all the chromosomes
-        int[] fitnessArr = new int[popConst];
+        double[] fitnessArr = new double[popConst];
         for (int i = 0; i < popConst; ++i) {
             fitnessArr[i] = populations[i].getPopulationAverage();
         }
@@ -162,7 +162,7 @@ public class GA {
      */
     public Population getBestPopulation() {
         //calculate the fitness of all the chromosomes
-        int[] fitnessArr = new int[popConst];
+        double[] fitnessArr = new double[popConst];
         for (int i = 0; i < popConst; ++i) {
             fitnessArr[i] = populations[i].getPopulationAverage();
         }
@@ -185,12 +185,12 @@ public class GA {
      * Calculates the average of all the populations in this generation of the GA
      * @return the average of all the populations in this generation of the GA
      */
-    public int getGenerationAverage() {
+    public double getGenerationAverage() {
         double genAve = 0;
         for (int i = 0; i < popConst; ++i) {
             genAve += populations[i].getPopulationAverage();
         }
 
-        return (int)(genAve/popConst);
+        return (genAve/popConst);
     }
 }

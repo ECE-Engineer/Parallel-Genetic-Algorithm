@@ -410,7 +410,7 @@ public class GUI extends JFrame {
 
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
-                pixelArr[(i * gridSize) + j] = arr[(((int)i/ChromosomeGridSize) * ChromosomeGridSize) + ((int)j/ChromosomeGridSize)].getAverageRGB();
+                pixelArr[(i * gridSize) + j] = arr[(((int)i/ChromosomeGridSize) * ChromosomeGridSize) + ((int)j/ChromosomeGridSize)].getAverageRGB();////////I COULD CHANGE THIS TO RENDER THE INDIVIDUAL CHROMOSOMES!!!! instead of their averages
             }
         }
 
@@ -459,11 +459,11 @@ public class GUI extends JFrame {
                             if (incrementer == (coreNum-1)) {
 
                                 //find the overall best solution and display it
-                                int[] fitArr = new int[coreNum];
+                                double[] fitArr = new double[coreNum];
                                 for (int j = 0; j < coreNum; ++j) {
                                     fitArr[incrementer] = bestChromosomes[incrementer].getFitness();
                                 }
-                                int[] copy = fitArr;
+                                double[] copy = fitArr;
                                 Arrays.sort(fitArr);
                                 int pos = 0;
                                 for (int j = 0; j < coreNum; ++j) {
@@ -503,8 +503,8 @@ public class GUI extends JFrame {
                     threads[renderingNum] = new Thread(() -> {
                         GA geneticAlgorithm = new GA();
                         int counter = 0;
-                        int pastVal = 0;
-                        int currentVal;
+                        double pastVal = 0;
+                        double currentVal;
                         while(true) try {
                             Population[] allPopulations = geneticAlgorithm.getPopulations();
 
@@ -517,19 +517,19 @@ public class GUI extends JFrame {
                                 try {
 		                    //swap between 2 threads every 25 generations
 		                    if (counter%swapingGenerationConst == 0) {
-				            Thread.sleep(renderingNum*sleepConst);
-				            //pick a random population
-				            int pos = ThreadLocalRandom.current().nextInt(allPopulations.length);
-				            Population popElement = allPopulations[pos];
-				            exchanger.exchange(popElement, renderingNum*sleepConst*timeoutConst, TimeUnit.MILLISECONDS);
+                                Thread.sleep(renderingNum*sleepConst);
+                                //pick a random population
+                                int pos = ThreadLocalRandom.current().nextInt(allPopulations.length);
+                                Population popElement = allPopulations[pos];
+                                exchanger.exchange(popElement, renderingNum*sleepConst*timeoutConst, TimeUnit.MILLISECONDS);
 
-				            //set the changes
-				            for (int j = 0; j < allPopulations.length; ++j) {
-				                if (j == pos) {
-				                    allPopulations[j] = popElement;
-				                    break;
-				                }
-				            }
+                                //set the changes
+                                for (int j = 0; j < allPopulations.length; ++j) {
+                                    if (j == pos) {
+                                        allPopulations[j] = popElement;
+                                        break;
+                                    }
+                                }
 		                    }
 
 		                    currentVal = geneticAlgorithm.getGenerationAverage();
@@ -585,8 +585,8 @@ public class GUI extends JFrame {
                 }
 
                 //start all the threads
-                for (int i = 0; i < threads.length; ++i) {
-                    threads[i].start();
+                for (Thread thread : threads) {
+                    thread.start();
                 }
             }
         }

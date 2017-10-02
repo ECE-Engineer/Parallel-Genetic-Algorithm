@@ -57,12 +57,12 @@ public class Population {
     public Chromosome getWinningChromosome() {
         FitnessCalculator fitCalc = new FitnessCalculator();
         //calculate the fitness of all the chromosomes
-        int[] fitnessArr = new int[chromAmount];
+        double[] fitnessArr = new double[chromAmount];
         for (int i = 0; i < chromAmount; ++i) {
             fitnessArr[i] = fitCalc.getOverallFitness(chromosomes[i]);
         }
 
-        int[] copy = fitnessArr;
+        double[] copy = fitnessArr;
 
         //sort all the chromosomes
         Arrays.sort(fitnessArr);
@@ -86,12 +86,12 @@ public class Population {
         FitnessCalculator fitCalc = new FitnessCalculator();
 
         //calculate the fitness of all the chromosomes
-        int[] fitnessArr = new int[chromAmount];
+        double[] fitnessArr = new double[chromAmount];
         for (int i = 0; i < chromAmount; ++i) {
             fitnessArr[i] = fitCalc.getOverallFitness(chromosomes[i]);
         }
 
-        int[] copy = fitnessArr;
+        double[] copy = fitnessArr;
 
         //sort all the chromosomes
         Arrays.sort(fitnessArr);
@@ -131,17 +131,17 @@ public class Population {
         int newCounter = 0;
         //fill the buffer
         Chromosome[] buffer = new Chromosome[chromAmount];
-        for (int i = 0; i < bestHalf.length; ++i) {
-            buffer[newCounter] = bestHalf[i];
+        for (Chromosome aBestHalf : bestHalf) {
+            buffer[newCounter] = aBestHalf;
             ++newCounter;
         }
-        for (int i = 0; i < children.length; ++i) {
-            buffer[newCounter] = children[i];
+        for (Chromosome aChildren : children) {
+            buffer[newCounter] = aChildren;
             ++newCounter;
         }
         //save the random chromosomes
-        for (int i = 0; i < newChromosomes.length; ++i) {
-            buffer[newCounter] = newChromosomes[i];
+        for (Chromosome newChromosome : newChromosomes) {
+            buffer[newCounter] = newChromosome;
             ++newCounter;
         }
         return buffer;
@@ -151,7 +151,7 @@ public class Population {
      * Calculate the average fitness value of a population
      * @return the average fitness value of a population
      */
-    public int getPopulationAverage() {
+    public double getPopulationAverage() {
         FitnessCalculator fitCalc = new FitnessCalculator();
 
         double ave = 0;
@@ -160,6 +160,6 @@ public class Population {
             ave += fitCalc.getOverallFitness(chromosomes[i]);
         }
 
-        return (int)(ave/chromAmount);
+        return (ave/chromAmount);
     }
 }
