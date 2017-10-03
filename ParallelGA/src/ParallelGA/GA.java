@@ -47,10 +47,9 @@ public class GA {
             buffer[position] = aHalf;
             ++position;
         }
-        //breed the top half populations
-        for (int i = 0; i < popConst/2; ++i) {
-            buffer[position] = new Population(populations[i].breed());
-            ++position;
+        //breed some arbitrary half of all the populations
+        for (int i = popConst/2; i < popConst; ++i) {
+            buffer[i] = new Population(populations[i].breed());
         }
 
         return buffer;
@@ -82,7 +81,8 @@ public class GA {
             fitnessArr[i] = fitCalc.getOverallFitness(topChromosomes[i]);
         }
 
-        double[] copy = fitnessArr;
+        final double[] copy = new double[fitnessArr.length];
+        System.arraycopy(fitnessArr, 0, copy, 0, copy.length);
 
         //sort all the chromosomes
         Arrays.sort(fitnessArr);
@@ -91,7 +91,7 @@ public class GA {
         int position = 0;
         //lookup the fitness in the copy array to find the corresponding position to use
         for (int j = 0; j < copy.length; ++j) {
-            if (copy[j] == fitnessArr[fitnessArr.length-1]) {
+            if (copy[j] == fitnessArr[0]) {
                 position = j;
             }
         }
@@ -118,7 +118,8 @@ public class GA {
             fitnessArr[i] = populations[i].getPopulationAverage();
         }
 
-        double[] copy = fitnessArr;
+        final double[] copy = new double[fitnessArr.length];
+        System.arraycopy(fitnessArr, 0, copy, 0, copy.length);
 
         //sort all the chromosomes
         Arrays.sort(fitnessArr);
@@ -127,7 +128,7 @@ public class GA {
         Population[] buffer = new Population[popConst/2];
         int count = 0;
         //lookup the fitness in the copy array to find the corresponding position to use
-        for (int i = fitnessArr.length/2; i < fitnessArr.length; ++i) {
+        for (int i = 0; i < fitnessArr.length/2; ++i) {
             for (int j = 0; j < copy.length; ++j) {
                 if (copy[j] == fitnessArr[i]) {
                     buffer[count] = populations[j];
@@ -153,7 +154,7 @@ public class GA {
         //sort all the chromosomes
         Arrays.sort(fitnessArr);
 
-        return fitnessArr[popConst-1];
+        return fitnessArr[0];
     }
 
     /**
@@ -172,7 +173,7 @@ public class GA {
 
         Population answer = null;
         for (int i = 0; i < popConst; ++i) {
-            if (fitnessArr[popConst-1] == populations[i].getPopulationAverage()) {
+            if (fitnessArr[0] == populations[i].getPopulationAverage()) {
                 answer = populations[i];
                 break;
             }

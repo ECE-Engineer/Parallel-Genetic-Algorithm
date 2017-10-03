@@ -59,6 +59,6 @@ public class FitnessCalculator {
             sum += (c.getSeatArr()[bottom + (gridSize * x)] != null) ? Math.pow((currentVal - (double) c.getSeatArr()[bottom + (gridSize * x)].getStuAff()), 2) : 0;
         }
 
-        return ((-1)*(sum/ maxSingleSumPossible));
+        return (sum/ maxSingleSumPossible);
     }
 }

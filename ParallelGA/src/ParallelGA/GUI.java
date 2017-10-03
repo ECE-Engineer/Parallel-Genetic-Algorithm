@@ -461,20 +461,24 @@ public class GUI extends JFrame {
                                 //find the overall best solution and display it
                                 double[] fitArr = new double[coreNum];
                                 for (int j = 0; j < coreNum; ++j) {
-                                    fitArr[incrementer] = bestChromosomes[incrementer].getFitness();
+                                    fitArr[j] = bestChromosomes[j].getFitness();
                                 }
-                                double[] copy = fitArr;
+
+                                final double[] copy = new double[fitArr.length];
+                                System.arraycopy(fitArr, 0, copy, 0, copy.length);
+
                                 Arrays.sort(fitArr);
+
                                 int pos = 0;
                                 for (int j = 0; j < coreNum; ++j) {
-                                    if (fitArr[fitArr.length-1]==copy[incrementer]) {
-                                        pos = incrementer;
+                                    if (fitArr[0]==copy[j]) {
+                                        pos = j;
                                     }
                                 }
-                                this.renderChromosome(labelWinnerChromosome, bestChromosomes[incrementer].getSeatArr());
-                                this.renderChromosome(labelWinnerChromosome, bestChromosomes[incrementer].getSeatArr());
-                                this.renderChromosome(labelWinnerChromosome, bestChromosomes[incrementer].getSeatArr());
-                                String answer = "Fitness Value is:\t" + bestChromosomes[incrementer].getFitness();
+                                this.renderChromosome(labelWinnerChromosome, bestChromosomes[pos].getSeatArr());
+                                this.renderChromosome(labelWinnerChromosome, bestChromosomes[pos].getSeatArr());
+                                this.renderChromosome(labelWinnerChromosome, bestChromosomes[pos].getSeatArr());
+                                String answer = "Fitness Value is:\t" + bestChromosomes[pos].getFitness();
                                 JOptionPane.showMessageDialog(this, answer);
                                 break;
                             }
@@ -512,72 +516,68 @@ public class GUI extends JFrame {
                             if (renderingNum < canvasNum) {
                                 this.renderPopulations(threadCanvas, geneticAlgorithm.getBestPopulation().getChromosomes(), threadBufferedImage, threadPixels);
                             }
+                            try {
+                                //swap between 2 threads every 25 generations
+                                if (counter%swapingGenerationConst == 0) {
+                                    Thread.sleep(renderingNum*sleepConst);
+                                    //pick a random population
+                                    int pos = ThreadLocalRandom.current().nextInt(allPopulations.length);
+                                    Population popElement = allPopulations[pos];
+                                    exchanger.exchange(popElement, renderingNum*sleepConst*timeoutConst, TimeUnit.MILLISECONDS);
 
+                                    //set the changes
+                                    for (int j = 0; j < allPopulations.length; ++j) {
+                                        if (j == pos) {
+                                            allPopulations[j] = popElement;
+                                            break;
+                                        }
+                                    }
+                                }
 
-                                try {
-		                    //swap between 2 threads every 25 generations
-		                    if (counter%swapingGenerationConst == 0) {
-                                Thread.sleep(renderingNum*sleepConst);
-                                //pick a random population
-                                int pos = ThreadLocalRandom.current().nextInt(allPopulations.length);
-                                Population popElement = allPopulations[pos];
-                                exchanger.exchange(popElement, renderingNum*sleepConst*timeoutConst, TimeUnit.MILLISECONDS);
+                                currentVal = geneticAlgorithm.getGenerationAverage();
 
-                                //set the changes
-                                for (int j = 0; j < allPopulations.length; ++j) {
-                                    if (j == pos) {
-                                        allPopulations[j] = popElement;
+                                if (counter > 0) {
+                                    double percentDiff = Math.abs((double)Math.abs(Math.abs(pastVal) - Math.abs(currentVal))/(double)((pastVal + currentVal)/2))*100;
+                                    if (counter == generationNum || percentDiff < errorDiffThreshold) {
+                                        //USE EXCHANGERS TO UPDATE THE THE CHROMOSOME BEST SOLUTION ON THE MAIN THREAD
+                                        Chromosome threadBestChromosome = geneticAlgorithm.getBestChromosomeOverall();
+                                        try {
+                                            Thread.sleep(renderingNum);
+                                            queue.put(threadBestChromosome);
+                                        } catch (InterruptedException f) {
+                                            f.printStackTrace();
+                                        }
                                         break;
                                     }
                                 }
-		                    }
 
-		                    currentVal = geneticAlgorithm.getGenerationAverage();
+                                pastVal = currentVal;
+                                ++counter;
+                                geneticAlgorithm = new GA(geneticAlgorithm.nextGeneration());
+                            } catch (java.util.concurrent.TimeoutException g){
 
-		                    if (counter > 0) {
-		                        double percentDiff = Math.abs((double)Math.abs(Math.abs(pastVal) - Math.abs(currentVal))/(double)((pastVal + currentVal)/2))*100;
-		                        if (counter == generationNum || percentDiff < errorDiffThreshold) {
-		                            //USE EXCHANGERS TO UPDATE THE THE CHROMOSOME BEST SOLUTION ON THE MAIN THREAD
-		                            Chromosome threadBestChromosome = geneticAlgorithm.getBestChromosomeOverall();
-		                            try {
-		                                Thread.sleep(renderingNum);
-		                                queue.put(threadBestChromosome);
-		                            } catch (InterruptedException f) {
-		                                f.printStackTrace();
-		                            }
-		                            break;
-		                        }
-		                    }
+                                currentVal = geneticAlgorithm.getGenerationAverage();
 
-		                    pastVal = currentVal;
+                                if (counter > 0) {
+                                    double percentDiff = Math.abs((double)Math.abs(Math.abs(pastVal) - Math.abs(currentVal))/(double)((pastVal + currentVal)/2))*100;
+                                    if (counter == generationNum || percentDiff < errorDiffThreshold) {
+                                        //USE EXCHANGERS TO UPDATE THE THE CHROMOSOME BEST SOLUTION ON THE MAIN THREAD
+                                        Chromosome threadBestChromosome = geneticAlgorithm.getBestChromosomeOverall();
+                                        try {
+                                            Thread.sleep(renderingNum);
+                                            queue.put(threadBestChromosome);
+                                        } catch (InterruptedException f) {
+                                            f.printStackTrace();
+                                        }
+                                        break;
+                                    }
+                                }
 
-		                    ++counter;
-		                    geneticAlgorithm = new GA(geneticAlgorithm.nextGeneration());
+                                pastVal = currentVal;
 
-
-                                } catch (java.util.concurrent.TimeoutException g){
-		                    currentVal = geneticAlgorithm.getGenerationAverage();
-
-		                    if (counter > 0) {
-		                        double percentDiff = Math.abs((double)Math.abs(Math.abs(pastVal) - Math.abs(currentVal))/(double)((pastVal + currentVal)/2))*100;
-		                        if (counter == generationNum || percentDiff < errorDiffThreshold) {
-		                            //USE EXCHANGERS TO UPDATE THE THE CHROMOSOME BEST SOLUTION ON THE MAIN THREAD
-		                            Chromosome threadBestChromosome = geneticAlgorithm.getBestChromosomeOverall();
-		                            try {
-		                                Thread.sleep(renderingNum);
-		                                queue.put(threadBestChromosome);
-		                            } catch (InterruptedException f) {
-		                                f.printStackTrace();
-		                            }
-		                            break;
-		                        }
-		                    }
-
-		                    pastVal = currentVal;
-
-		                    ++counter;
-		                    geneticAlgorithm = new GA(geneticAlgorithm.nextGeneration());
-				}
+                                ++counter;
+                                geneticAlgorithm = new GA(geneticAlgorithm.nextGeneration());
+				            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

@@ -62,7 +62,8 @@ public class Population {
             fitnessArr[i] = fitCalc.getOverallFitness(chromosomes[i]);
         }
 
-        double[] copy = fitnessArr;
+        final double[] copy = new double[fitnessArr.length];
+        System.arraycopy(fitnessArr, 0, copy, 0, copy.length);
 
         //sort all the chromosomes
         Arrays.sort(fitnessArr);
@@ -71,7 +72,7 @@ public class Population {
         int position = 0;
         //lookup the fitness in the copy array to find the corresponding position to use
         for (int j = 0; j < copy.length; ++j) {
-            if (copy[j] == fitnessArr[fitnessArr.length-1]) {
+            if (copy[j] == fitnessArr[0]) {
                 position = j;
             }
         }
@@ -91,7 +92,8 @@ public class Population {
             fitnessArr[i] = fitCalc.getOverallFitness(chromosomes[i]);
         }
 
-        double[] copy = fitnessArr;
+        final double[] copy = new double[fitnessArr.length];
+        System.arraycopy(fitnessArr, 0, copy, 0, copy.length);
 
         //sort all the chromosomes
         Arrays.sort(fitnessArr);
@@ -100,7 +102,7 @@ public class Population {
         Chromosome[] buffer = new Chromosome[chromAmount/2];
         int count = 0;
         //lookup the fitness in the copy array to find the corresponding position to use
-        for (int i = fitnessArr.length/2; i < fitnessArr.length; ++i) {
+        for (int i = 0; i < fitnessArr.length/2; ++i) {
             for (int j = 0; j < copy.length; ++j) {
                 if (copy[j] == fitnessArr[i]) {
                     buffer[count] = chromosomes[j];

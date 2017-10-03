@@ -22,11 +22,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ParallelGA/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="568">
-              <caret line="500" column="41" lean-forward="true" selection-start-line="500" selection-start-column="41" selection-end-line="500" selection-end-column="41" />
+            <state relative-caret-position="3067">
+              <caret line="553" column="53" lean-forward="false" selection-start-line="553" selection-start-column="53" selection-end-line="553" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -34,11 +34,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GA.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GA.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ParallelGA/GA.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="45" column="39" lean-forward="true" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
+            <state relative-caret-position="357">
+              <caret line="49" column="46" lean-forward="false" selection-start-line="49" selection-start-column="46" selection-end-line="49" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -47,8 +47,8 @@
       <file leaf-file-name="Population.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ParallelGA/Population.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1615">
-              <caret line="101" column="88" lean-forward="true" selection-start-line="101" selection-start-column="88" selection-end-line="101" selection-end-column="88" />
+            <state relative-caret-position="1547">
+              <caret line="97" column="34" lean-forward="true" selection-start-line="97" selection-start-column="34" selection-end-line="97" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -57,8 +57,8 @@
       <file leaf-file-name="FitnessCalculator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ParallelGA/FitnessCalculator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="37" column="42" lean-forward="false" selection-start-line="37" selection-start-column="42" selection-end-line="37" selection-end-column="42" />
+            <state relative-caret-position="1007">
+              <caret line="61" column="43" lean-forward="true" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -67,8 +67,8 @@
       <file leaf-file-name="Chromosome.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ParallelGA/Chromosome.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2567">
-              <caret line="157" column="34" lean-forward="true" selection-start-line="157" selection-start-column="34" selection-end-line="157" selection-end-column="34" />
+            <state relative-caret-position="321">
+              <caret line="88" column="24" lean-forward="false" selection-start-line="88" selection-start-column="20" selection-end-line="88" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -95,7 +95,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>label10</find>
       <find>label11</find>
       <find>label25</find>
       <find>seatArranement</find>
@@ -125,6 +124,7 @@
       <find>pixels</find>
       <find>getOverallFitness</find>
       <find>getFitness</find>
+      <find>copy</find>
     </findStrings>
     <replaceStrings>
       <replace>icon</replace>
@@ -168,8 +168,8 @@
         <option value="$PROJECT_DIR$/src/ParallelGA/Chromosome.java" />
         <option value="$PROJECT_DIR$/src/ParallelGA/FitnessCalculator.java" />
         <option value="$PROJECT_DIR$/src/ParallelGA/Population.java" />
-        <option value="$PROJECT_DIR$/src/ParallelGA/GA.java" />
         <option value="$PROJECT_DIR$/src/ParallelGA/GUI.java" />
+        <option value="$PROJECT_DIR$/src/ParallelGA/GA.java" />
       </list>
     </option>
   </component>
@@ -430,7 +430,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="true" show_stripe_button="true" weight="0.8961175" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="2158" y="347" width="454" height="534" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="true" show_stripe_button="true" weight="0.8961175" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="2562" y="296" width="1597" height="844" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -557,43 +557,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ParallelGA/Chromosome.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2567">
-          <caret line="157" column="34" lean-forward="true" selection-start-line="157" selection-start-column="34" selection-end-line="157" selection-end-column="34" />
+        <state relative-caret-position="321">
+          <caret line="88" column="24" lean-forward="false" selection-start-line="88" selection-start-column="20" selection-end-line="88" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ParallelGA/FitnessCalculator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="37" column="42" lean-forward="false" selection-start-line="37" selection-start-column="42" selection-end-line="37" selection-end-column="42" />
+        <state relative-caret-position="1007">
+          <caret line="61" column="43" lean-forward="true" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ParallelGA/Population.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1615">
-          <caret line="101" column="88" lean-forward="true" selection-start-line="101" selection-start-column="88" selection-end-line="101" selection-end-column="88" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ParallelGA/GA.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="45" column="39" lean-forward="true" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
+        <state relative-caret-position="1547">
+          <caret line="97" column="34" lean-forward="true" selection-start-line="97" selection-start-column="34" selection-end-line="97" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ParallelGA/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="568">
-          <caret line="500" column="41" lean-forward="true" selection-start-line="500" selection-start-column="41" selection-end-line="500" selection-end-column="41" />
+        <state relative-caret-position="3067">
+          <caret line="553" column="53" lean-forward="false" selection-start-line="553" selection-start-column="53" selection-end-line="553" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ParallelGA/GA.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="49" column="46" lean-forward="false" selection-start-line="49" selection-start-column="46" selection-end-line="49" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>
